@@ -24,6 +24,9 @@ jobs:
 
     - name: Unit Testing
       run: |
+        python manage.py clear_cache
+        pip uninstall django djangorestframework
+        pip install django djangorestframework
         pip install --upgrade django psycopg2
         python3 manage.py test
     - name: Build and push the image
