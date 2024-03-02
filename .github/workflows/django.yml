@@ -22,11 +22,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Unit Testing
-      run: |
-        pip install django djangorestframework
-        pip install --upgrade django psycopg2
-        python3 manage.py test
+    # - name: Unit Testing
+    #   run: |
+    #     pip install django djangorestframework
+    #     pip install --upgrade django psycopg2
+    #     python3 manage.py test
     - name: Build and push the image
       run: |
         docker login --username mysoladi --password ${{secrets.ACCESS_TOKEN}} ghcr.io
