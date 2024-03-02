@@ -15,6 +15,8 @@ COPY ./lms_login_api .
 
 COPY ./utils .
 
+COPY ./manage.py .
+
 COPY ./entrypoint.sh .
 
 RUN chmod +x entrypoint.sh

@@ -1,7 +1,6 @@
 
 
 from django.db import migrations, models
-import django.contrib.auth.validators
 
 
 class Migration(migrations.Migration):
