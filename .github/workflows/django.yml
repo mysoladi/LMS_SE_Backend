@@ -24,7 +24,7 @@ jobs:
 
     - name: Unit Testing
       run: |
-        cd ciphers_project
+        cd lms_login_api
         python3 manage.py test
     - name: Build and push the image
       run: |

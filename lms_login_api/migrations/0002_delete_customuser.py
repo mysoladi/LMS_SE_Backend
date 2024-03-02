@@ -9,8 +9,3 @@ class Migration(migrations.Migration):
         ('lms_login_api', '0001_initial'),
     ]
 
-    operations = [
-        migrations.DeleteModel(
-            name='CustomUser',
-        ),
-    ]
