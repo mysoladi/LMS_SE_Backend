@@ -76,6 +76,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3002',
     "http://127.0.0.1:8000",
     'https://pages.github.iu.edu',
+    "edunexa.onrender.com"
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -170,3 +171,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "noreply.edunexa@gmail.com"
 EMAIL_HOST_PASSWORD = "xltlanilwmmrvcag"
 FRONTEND_URL = "http://localhost:3002"
+
+ALLOWED_HOSTS = ['edunexa.onrender.com', 'localhost', '0.0.0.0']
+
