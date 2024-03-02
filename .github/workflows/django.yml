@@ -24,7 +24,7 @@ jobs:
 
     - name: Unit Testing
       run: |
-        pip install --upgrade django psycopg2
+        cd ciphers_project
         python3 manage.py test
     - name: Build and push the image
       run: |
