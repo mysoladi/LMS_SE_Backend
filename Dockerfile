@@ -1,21 +1,22 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8
+FROM python:3.11.6-alpine
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+WORKDIR /home/application
 
-# Set the working directory in the container
-WORKDIR /lms_login_api
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Copy the current directory contents into the container at /app
-COPY . /lms_login_api
+RUN pip install --upgrade pip
 
-# Install any needed dependencies specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+COPY ./requirements.txt .
 
-# Make port 8000 available to the world outside this container
-EXPOSE 3000
+RUN pip install -r requirements.txt
 
-# Define the command to run your application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+COPY ./lms_login_api .
+
+COPY ./utils .
+
+COPY ./entrypoint.sh .
+
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
