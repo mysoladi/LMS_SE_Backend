@@ -11,9 +11,9 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY ./lms_login_api login_api/
+COPY ./lms_login_api .
 
-COPY ./lms_login_api utils/
+COPY ./utils .
 
 COPY ./entrypoint.sh .
 
