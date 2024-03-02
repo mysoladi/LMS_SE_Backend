@@ -172,5 +172,4 @@ EMAIL_HOST_USER = "noreply.edunexa@gmail.com"
 EMAIL_HOST_PASSWORD = "xltlanilwmmrvcag"
 FRONTEND_URL = "http://localhost:3002"
 
-ALLOWED_HOSTS = ['edunexa.onrender.com', 'localhost', '0.0.0.0']
-
+ALLOWED_HOSTS = ['edunexa.onrender.com', 'localhost', '0.0.0.0', '127.0.0.1']
