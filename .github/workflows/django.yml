@@ -1,0 +1,33 @@
+name: Deploy api service
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Unit Testing
+      run: |
+        cd ciphers_project
+        python3 manage.py test
+    - name: Build and push the image
+      run: |
+        docker login --username mysoladi --password ${{secrets.ACCESS_TOKEN}} ghcr.io
+        docker build -t ghcr.io/mysoladi/Edunexa:latest --file Dockerfile .
+        docker push ghcr.io/mysoladi/Edunexa:latest
