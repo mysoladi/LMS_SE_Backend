@@ -24,7 +24,6 @@ jobs:
 
     - name: Unit Testing
       run: |
-        cd lms_login_api
         python3 manage.py test
     - name: Build and push the image
       run: |
