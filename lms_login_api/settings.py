@@ -110,7 +110,16 @@ WSGI_APPLICATION = 'lms_login_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = os.getenv("DATABASES")
+DATABASES = {
+    'default': {
+        'ENGINE': os.getenv("ENGINE"),
+        'NAME': os.getenv("NAME"),
+        'USER': os.getenv("USER"),
+        'PASSWORD': os.getenv("PASSWORD"),
+        'HOST': os.getenv("HOST"),
+        'PORT': os.getenv("PORT"),
+    }
+}
 
 
 # Password validation
@@ -168,4 +177,5 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 FRONTEND_URL = os.getenv("FRONTEND_URL")
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS")
+print(type(os.getenv("ALLOWED_HOSTS")))
+ALLOWED_HOSTS = list(os.getenv("ALLOWED_HOSTS"))
