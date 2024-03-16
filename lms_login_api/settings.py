@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
+from dotenv import dotenv_values
 import os
 
 load_dotenv()
@@ -110,14 +111,16 @@ WSGI_APPLICATION = 'lms_login_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+env_vars = dotenv_values('.env')
+
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv("ENGINE"),
-        'NAME': os.getenv("NAME"),
-        'USER': os.getenv("USER"),
-        'PASSWORD': os.getenv("PASSWORD"),
-        'HOST': os.getenv("HOST"),
-        'PORT': os.getenv("PORT"),
+        'ENGINE': env_vars["ENGINE"],
+        'NAME': env_vars["NAME"],
+        'USER': env_vars["USER"],
+        'PASSWORD': env_vars["PASSWORD"],
+        'HOST': env_vars["HOST"],
+        'PORT': env_vars["PORT"],
     }
 }
 
@@ -177,5 +180,4 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 FRONTEND_URL = os.getenv("FRONTEND_URL")
 
-print(type(os.getenv("ALLOWED_HOSTS")))
 ALLOWED_HOSTS = list(os.getenv("ALLOWED_HOSTS"))
