@@ -2,11 +2,11 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, username, first_name, last_name, sec_answer, password=None):
+    def create_user(self, email, username, first_name, last_name, sec_answer, user_role, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, username=username, first_name=first_name, last_name=last_name, sec_answer=sec_answer)
+        user = self.model(email=email, username=username, first_name=first_name, last_name=last_name, sec_answer=sec_answer, user_role=user_role, **extra_fields)
         user.set_password(password)  # This hashes the password
         user.save(using=self._db)
         return user
@@ -23,6 +23,8 @@ class CustomUser(AbstractBaseUser):
     sec_answer = models.CharField(max_length=150)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
+    user_role = models.CharField(choices=[('Student', 'Student'), ('Instructor', 'Instructor'), ('Admin', 'Admin')], default='Student', max_length=20)
+
     
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

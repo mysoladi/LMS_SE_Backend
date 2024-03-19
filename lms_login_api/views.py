@@ -5,17 +5,16 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from .models import CustomUser  # Import your custom user model
-from .serializers import UserSerializer
+from lms_login_api.serializers import UserSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer
+from lms_login_api.serializers import UserSerializer
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from lms_login_api import settings
 from django.utils.html import strip_tags
 import secrets
 from django.core.mail.backends.smtp import EmailBackend
@@ -29,7 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         # Encrypt the password before saving the user
         validated_data = serializer.validated_data
-        user = CustomUser.objects.create_user(validated_data['email'], validated_data['password'], validated_data['first_name'], validated_data['last_name'], validated_data['sec_answer'], validated_data['username'])
+        user = CustomUser.objects.create_user(validated_data['email'], validated_data['password'], validated_data['first_name'], validated_data['last_name'], validated_data['sec_answer'], validated_data['username'], validated_data['user_role'])
         serializer.instance = user
 
 class CreateUserView(APIView):

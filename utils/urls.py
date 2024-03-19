@@ -22,7 +22,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from rest_framework.routers import DefaultRouter
-from utils.views import *
+from lms_login_api.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),

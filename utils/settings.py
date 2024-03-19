@@ -87,7 +87,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ROOT_URLCONF = 'lms_login_api.urls'
+ROOT_URLCONF = 'utils.urls'
 
 TEMPLATES = [
     {
@@ -105,7 +105,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'lms_login_api.wsgi.application'
+WSGI_APPLICATION = 'utils.wsgi.application'
 
 
 # Database
@@ -166,7 +166,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'utils.CustomUser'
+AUTH_USER_MODEL = 'lms_login_api.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'lms_login_api.authentication.CustomUserAuthBackend',
