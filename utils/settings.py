@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+from dotenv import dotenv_values
+import os
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,7 +87,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ROOT_URLCONF = 'lms_login_api.urls'
+ROOT_URLCONF = 'utils.urls'
 
 TEMPLATES = [
     {
@@ -99,20 +105,22 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'lms_login_api.wsgi.application'
+WSGI_APPLICATION = 'utils.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+env_vars = dotenv_values('.env')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'c1ge-Daf*4g6E41b-3b6AE4*CE5a6dAC',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '32223',
+        'ENGINE': env_vars["ENGINE"],
+        'NAME': env_vars["NAME"],
+        'USER': env_vars["USER"],
+        'PASSWORD': env_vars["PASSWORD"],
+        'HOST': env_vars["HOST"],
+        'PORT': env_vars["PORT"],
     }
 }
 
@@ -158,18 +166,18 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'utils.CustomUser'
+AUTH_USER_MODEL = 'lms_login_api.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'lms_login_api.authentication.CustomUserAuthBackend',
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "noreply.edunexa@gmail.com"
-EMAIL_HOST_PASSWORD = "xltlanilwmmrvcag"
-FRONTEND_URL = "http://localhost:3002"
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 
-ALLOWED_HOSTS = ['edunexa.onrender.com', 'localhost', '0.0.0.0', '127.0.0.1', "https://edunexa.onrender.com"]
+ALLOWED_HOSTS = list(os.getenv("ALLOWED_HOSTS"))
