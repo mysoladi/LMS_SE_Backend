@@ -10,7 +10,20 @@ jobs:
 
 
     runs-on: ubuntu-latest
-
+    env:
+      ENGINE: ${{secrets.ENGINE}}
+      NAME: ${{secrets.NAME}}
+      USER: ${{secrets.USER}}
+      PASSWORD: ${{secrets.PASSWORD}}
+      HOST: ${{secrets.HOST}}
+      PORT: ${{secrets.PORT}}
+      EMAIL_BACKEND: ${{secrets.EMAIL_BACKEND}}
+      EMAIL_HOST: ${{secrets.EMAIL_HOST}}
+      EMAIL_USE_TLS: ${{secrets.EMAIL_USE_TLS}}
+      EMAIL_PORT: ${{secrets.EMAIL_PORT}}
+      EMAIL_HOST_USER: ${{secrets.EMAIL_HOST_USER}}
+      EMAIL_HOST_PASSWORD: ${{secrets.EMAIL_HOST_PASSWORD}}
+      FRONTEND_URL: ${{secrets.FRONTEND_URL}}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.11
