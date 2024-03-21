@@ -27,6 +27,20 @@ jobs:
     #     pip install django djangorestframework
     #     pip install --upgrade django psycopg2
     #     python3 manage.py test
+    env:
+      ENGINE: ${{secrets.ENGINE}}
+      NAME: ${{secrets.NAME}}
+      USER: ${{secrets.USER}}
+      PASSWORD: ${{secrets.PASSWORD}}
+      HOST: ${{secrets.HOST}}
+      PORT: ${{secrets.PORT}}
+      EMAIL_BACKEND: ${{secrets.EMAIL_BACKEND}}
+      EMAIL_HOST: ${{secrets.EMAIL_HOST}}
+      EMAIL_USE_TLS: ${{secrets.EMAIL_USE_TLS}}
+      EMAIL_PORT: ${{secrets.EMAIL_PORT}}
+      EMAIL_HOST_USER: ${{secrets.EMAIL_HOST_USER}}
+      EMAIL_HOST_PASSWORD: ${{secrets.EMAIL_HOST_PASSWORD}}
+      FRONTEND_URL: ${{secrets.FRONTEND_URL}}
     - name: Build and push the image
       run: |
         docker login --username mysoladi --password ${{secrets.ACCESS_TOKEN}} ghcr.io
