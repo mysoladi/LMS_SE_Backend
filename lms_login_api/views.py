@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -14,6 +15,7 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.mail import send_mail
+from utils.settings import *
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import secrets
