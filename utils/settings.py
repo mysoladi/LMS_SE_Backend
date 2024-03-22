@@ -115,12 +115,12 @@ env_vars = dotenv_values('.env')
 
 DATABASES = {
     'default': {
-        'ENGINE': env_vars["ENGINE"],
-        'NAME': env_vars["NAME"],
-        'USER': env_vars["USER"],
-        'PASSWORD': env_vars["PASSWORD"],
-        'HOST': env_vars["HOST"],
-        'PORT': env_vars["PORT"],
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'c1ge-Daf*4g6E41b-3b6AE4*CE5a6dAC',
+        'HOST': 'viaduct.proxy.rlwy.net',
+        'PORT': '32223',
     }
 }
 
@@ -172,12 +172,25 @@ AUTHENTICATION_BACKENDS = [
     'lms_login_api.authentication.CustomUserAuthBackend',
 ]
 
-EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-FRONTEND_URL = os.getenv("FRONTEND_URL")
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER='noreply.edunexa@gmail.com'
+EMAIL_HOST_PASSWORD='xltlanilwmmrvcag'
+FRONTEND_URL='http://localhost:3002'
+
+
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER='noreply.edunexa@gmail.com'
+EMAIL_HOST_PASSWORD='xltlanilwmmrvcag'
+FRONTEND_URL='http://localhost:3002'
+
 
 ALLOWED_HOSTS = ['edunexa.onrender.com', 'localhost', '0.0.0.0', '127.0.0.1', "https://edunexa.onrender.com"]
+
+
