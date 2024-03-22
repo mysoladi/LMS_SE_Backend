@@ -170,6 +170,7 @@ AUTH_USER_MODEL = 'lms_login_api.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'lms_login_api.authentication.CustomUserAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Include the default ModelBackend for fallback
 ]
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
