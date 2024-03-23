@@ -77,6 +77,14 @@ class UserInformation(RetrieveAPIView):
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def options(self, request, *args, **kwargs):
+        # Handle preflight OPTIONS request
+        response = super().options(request, *args, **kwargs)
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET, PUT, PATCH, DELETE, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "Authorization, Content-Type"
+        return response
+
 class PasswordRecoveryView(APIView):
     permission_classes = [AllowAny]  # Allow any user to recover password
 
