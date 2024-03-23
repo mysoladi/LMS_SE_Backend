@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from rest_framework.generics import RetrieveAPIView
 from django.urls import reverse
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -68,14 +69,11 @@ class UserLoginView(APIView):
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
-class UserInformation(APIView):
-    def get_queryset(self):
-        # Define the queryset for the view
-        return CustomUser.objects.all()
+class UserInformation(RetrieveAPIView):
+    queryset = CustomUser.objects.all()  # Define the queryset directly in the view
 
     def get(self, request, user_id):
-        queryset = self.get_queryset()
-        user = get_object_or_404(queryset, id=user_id)
+        user = get_object_or_404(self.get_queryset(), id=user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
