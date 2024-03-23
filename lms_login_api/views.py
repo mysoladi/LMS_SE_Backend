@@ -72,6 +72,7 @@ class UserLoginView(APIView):
 class UserInformation(RetrieveAPIView):
     queryset = CustomUser.objects.all()  # Define the queryset directly in the view
     serializer_class = UserSerializer  # Assuming you have defined UserSerializer
+    permission_classes = [IsAuthenticated]  # Use IsAuthenticated permission class
 
     def get_object(self):
         # Get the user ID from the query parameters
