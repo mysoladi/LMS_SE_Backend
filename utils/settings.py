@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-4cac6_$k8t0yssj!_)#biv+bvo0zi398c8zk9yg73u0$=d!#+@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['edunexa.onrender.com', 'http://localhost:3000', '0.0.0.0', '127.0.0.1', "https://edunexa.onrender.com"]
 
 
 # Application definition
@@ -86,7 +86,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://edunexa.onrender.com"
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from all origins (for development purposes)
+CORS_ALLOW_CREDENTIALS = True  # Allow credentials (e.g., cookies, authorization headers)
 
 ROOT_URLCONF = 'utils.urls'
 
@@ -183,6 +184,5 @@ EMAIL_HOST_PASSWORD='xltlanilwmmrvcag'
 FRONTEND_URL='http://localhost:3002'
 
 
-ALLOWED_HOSTS = ['edunexa.onrender.com', 'http://localhost:3000', '0.0.0.0', '127.0.0.1', "https://edunexa.onrender.com"]
 
 
