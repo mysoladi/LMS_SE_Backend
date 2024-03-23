@@ -31,10 +31,13 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('user/', CreateUserView.as_view(), name='create_user'),  # Endpoint for user registration
     path('users/', UserInformation.as_view(), name='user_information'),
-    path('login/', UserLoginView.as_view(), name='user_login'),    # Endpoint for user login
-    path('recover-password/', PasswordRecoveryView.as_view(), name='password_recovery'),  # Endpoint for password recovery
+    path('getUserByEmail/', UserDetailsByEmailView.as_view(), name='user_info_by_email'),
+    path('login/', UserLoginView.as_view(), name='user_login'),  # Endpoint for user login
+    path('recover-password/', PasswordRecoveryView.as_view(), name='password_recovery'),
+    # Endpoint for password recovery
     path('change-password/', ChangePasswordView.as_view(), name='sec_change_password'),
     path('email-password/', EmailPasswordRecoveryView.as_view(), name='email_change_password')
+
 ]
 
 router = DefaultRouter()
