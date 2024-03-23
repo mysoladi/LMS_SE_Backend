@@ -86,6 +86,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://edunexa.onrender.com"
 ]
 
+CORS_ALLOW_HEADERS = [
+    'Authorization',  # Add other headers you want to allow
+]
+
 CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from all origins (for development purposes)
 CORS_ALLOW_CREDENTIALS = True  # Allow credentials (e.g., cookies, authorization headers)
 
