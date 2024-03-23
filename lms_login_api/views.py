@@ -71,10 +71,19 @@ class UserLoginView(APIView):
 
 class UserInformation(RetrieveAPIView):
     queryset = CustomUser.objects.all()  # Define the queryset directly in the view
+    serializer_class = UserSerializer  # Assuming you have defined UserSerializer
 
-    def get(self, request, user_id):
+    def get_object(self):
+        # Get the user ID from the query parameters
+        user_id = self.request.query_params.get('user_id')
+        
+        # Get the user object using the extracted user ID
         user = get_object_or_404(self.get_queryset(), id=user_id)
-        serializer = UserSerializer(user)
+        return user
+
+    def get(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer = self.get_serializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def options(self, request, *args, **kwargs):
