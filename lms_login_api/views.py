@@ -69,14 +69,15 @@ class UserLoginView(APIView):
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserInformation(APIView):
+    def get_queryset(self):
+        # Define the queryset for the view
+        return CustomUser.objects.all()
 
     def get(self, request, user_id):
-        try:
-            user = CustomUser.objects.get(id=user_id)
-            serializer = UserSerializer(user)  # Assuming you have a UserSerializer
-            return Response(serializer.data)
-        except CustomUser.DoesNotExist:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        queryset = self.get_queryset()
+        user = get_object_or_404(queryset, id=user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 class PasswordRecoveryView(APIView):
     permission_classes = [AllowAny]  # Allow any user to recover password
