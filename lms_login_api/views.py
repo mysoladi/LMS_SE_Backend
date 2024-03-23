@@ -75,7 +75,7 @@ class UserInformation(RetrieveAPIView):
     def get(self, request, user_id):
         user = get_object_or_404(self.get_queryset(), id=user_id)
         serializer = UserSerializer(user)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PasswordRecoveryView(APIView):
     permission_classes = [AllowAny]  # Allow any user to recover password
