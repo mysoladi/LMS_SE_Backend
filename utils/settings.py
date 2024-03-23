@@ -88,6 +88,11 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_HEADERS = [
     'Authorization',  # Add other headers you want to allow
+    'content-type'
+]
+
+CORS_ALLOW_METHODS = [
+    'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS',  # Add other allowed methods
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from all origins (for development purposes)
@@ -116,8 +121,6 @@ WSGI_APPLICATION = 'utils.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-env_vars = dotenv_values('.env')
 
 DATABASES = {
     'default': {
