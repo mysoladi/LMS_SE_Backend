@@ -79,6 +79,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
+    'http://localhost:3000',
     'http://localhost:3002',
     "http://127.0.0.1:8000",
     'https://pages.github.iu.edu',
@@ -182,6 +183,6 @@ EMAIL_HOST_PASSWORD='xltlanilwmmrvcag'
 FRONTEND_URL='http://localhost:3002'
 
 
-ALLOWED_HOSTS = ['edunexa.onrender.com', 'localhost', '0.0.0.0', '127.0.0.1', "https://edunexa.onrender.com"]
+ALLOWED_HOSTS = ['edunexa.onrender.com', 'http://localhost:3000', '0.0.0.0', '127.0.0.1', "https://edunexa.onrender.com"]
 
 
