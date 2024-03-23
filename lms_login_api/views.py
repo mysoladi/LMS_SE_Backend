@@ -31,10 +31,14 @@ class UserViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         # Encrypt the password before saving the user
         validated_data = serializer.validated_data
-        user = CustomUser.objects.create_user(validated_data['email'], validated_data['password'], validated_data['first_name'], validated_data['last_name'], validated_data['sec_answer'], validated_data['username'], validated_data['user_role'])
+        user = CustomUser.objects.create_user(validated_data['email'], validated_data['password'],
+                                              validated_data['first_name'], validated_data['last_name'],
+                                              validated_data['sec_answer'], validated_data['username'],
+                                              validated_data['user_role'])
         serializer.instance = user
 
-class CreateUserView(APIView):
+
+class  CreateUserView(APIView):
     permission_classes = [AllowAny]  # Allow any user to create a new user
 
     def post(self, request):
@@ -56,7 +60,7 @@ class UserLoginView(APIView):
         password = request.data.get('password')
 
         # Authenticate user using custom user model
-        
+
         user = authenticate(username=username, password=password)
 
         if user:
@@ -69,6 +73,7 @@ class UserLoginView(APIView):
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
+
 class UserInformation(RetrieveAPIView):
     queryset = CustomUser.objects.all()  # Define the queryset directly in the view
     serializer_class = UserSerializer  # Assuming you have defined UserSerializer
@@ -77,7 +82,7 @@ class UserInformation(RetrieveAPIView):
     def get_object(self):
         # Get the user ID from the query parameters
         user_id = self.request.query_params.get('user_id')
-        
+
         # Get the user object using the extracted user ID
         user = get_object_or_404(self.get_queryset(), id=user_id)
         return user
@@ -94,6 +99,31 @@ class UserInformation(RetrieveAPIView):
         response["Access-Control-Allow-Methods"] = "GET, PUT, PATCH, DELETE, OPTIONS"
         response["Access-Control-Allow-Headers"] = "Authorization, Content-Type"
         return response
+
+
+class UserDetailsByEmailView(RetrieveAPIView):
+    queryset = CustomUser.objects.all()  # Define the queryset directly in the view
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self):
+        email_id = self.request.query_params.get('email')
+        user = get_object_or_404(self.get_queryset(), email=email_id)
+        return user
+
+    def get(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer = self.get_serializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def options(self, request, *args, **kwargs):
+        # Handle preflight OPTIONS request
+        response = super().options(request, *args, **kwargs)
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET, PUT, PATCH, DELETE, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "Authorization, Content-Type"
+        return response
+
 
 class PasswordRecoveryView(APIView):
     permission_classes = [AllowAny]  # Allow any user to recover password
@@ -116,7 +146,6 @@ class PasswordRecoveryView(APIView):
 
                 token = secrets.token_urlsafe(32)
 
-
                 reset_url = f"http://localhost:3002/resetpassword?email={email}&token={token}"
 
                 # Generate reset password URL (replace 'reset_password_url' with your actual URL)
@@ -130,6 +159,7 @@ class PasswordRecoveryView(APIView):
 
         # If POST method is not used, return an error
         return JsonResponse({'error': 'Only POST method is allowed'}, status=405)
+
 
 class EmailPasswordRecoveryView(APIView):
     permission_classes = [AllowAny]
