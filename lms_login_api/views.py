@@ -67,7 +67,18 @@ class UserLoginView(APIView):
             }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-        
+
+class UserInformation(APIView):
+    permission_classes = [IsAuthenticated]  # Require authentication to access this API
+
+    def get(self, request, user_id):
+        # Retrieve the user based on the user_id from the URL
+        user = get_object_or_404(CustomUser, id=user_id)
+
+        # Assuming you have serializer for your CustomUser model to serialize the user data
+        serializer = UserSerializer(user)  # Replace CustomUserSerializer with your actual serializer
+
+        return Response(serializer.data)
 
 class PasswordRecoveryView(APIView):
     permission_classes = [AllowAny]  # Allow any user to recover password
